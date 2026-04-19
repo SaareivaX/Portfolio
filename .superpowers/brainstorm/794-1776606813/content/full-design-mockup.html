@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Full Design Preview — Xaviera Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #4c2372;
+    --purple-mid: #7b3fa8;
+    --purple-light: #c084fc;
+    --purple-glow: rgba(76,35,114,0.35);
+    --bg: #070611;
+    --bg2: #0d0a1a;
+    --text: #f0ede8;
+    --muted: #888;
+    --border: rgba(76,35,114,0.3);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── LABEL OVERLAY ── */
+  .section-label {
+    display: inline-block;
+    background: rgba(76,35,114,0.15);
+    border: 1px solid var(--border);
+    color: var(--purple-light);
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+    background: rgba(7,6,17,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 18px;
+    color: var(--purple-light);
+    letter-spacing: 1px;
+  }
+  .logo span { color: var(--text); }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; letter-spacing: 1px;
+    color: var(--muted); text-decoration: none;
+    transition: color 200ms ease-out;
+  }
+  .nav-links a:hover { color: var(--purple-light); }
+  .nav-links .active { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 48px;
+    position: relative;
+    overflow: hidden;
+    gap: 48px;
+  }
+  .glow-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .glow-blob-1 {
+    width: 500px; height: 500px;
+    top: -100px; right: -100px;
+    background: radial-gradient(circle, rgba(76,35,114,0.4) 0%, transparent 70%);
+  }
+  .glow-blob-2 {
+    width: 300px; height: 300px;
+    bottom: -80px; left: 200px;
+    background: radial-gradient(circle, rgba(76,35,114,0.2) 0%, transparent 70%);
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-pretitle {
+    font-family: 'Inter', monospace;
+    font-size: 11px; letter-spacing: 4px;
+    color: var(--purple-light); text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 16px;
+  }
+  .hero-pretitle::before {
+    content: ''; display: inline-block;
+    width: 20px; height: 1px; background: var(--purple-light);
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: clamp(42px, 6vw, 72px);
+    line-height: 0.95; text-transform: uppercase;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .hero-name-accent {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(18px, 2.5vw, 28px);
+    color: var(--purple-light);
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .hero-divider {
+    width: 48px; height: 2px;
+    background: linear-gradient(90deg, var(--purple), transparent);
+    margin-bottom: 20px;
+  }
+  .hero-desc {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.8; max-width: 420px;
+    margin-bottom: 32px;
+  }
+  .hero-desc strong { color: var(--purple-light); font-weight: 500; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--purple);
+    color: #fff; font-family: 'Inter', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 12px 28px; border: none; cursor: pointer;
+    transition: transform 160ms ease-out, background 200ms ease-out;
+    font-weight: 500;
+  }
+  .btn-primary:hover { background: var(--purple-mid); }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-stroke {
+    background: transparent;
+    color: var(--purple-light); font-family: 'Inter', sans-serif;
+    font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 12px 28px;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: transform 160ms ease-out, border-color 200ms ease-out, color 200ms ease-out;
+    font-weight: 400;
+  }
+  .btn-stroke:hover { border-color: var(--purple-light); color: #fff; }
+  .btn-stroke:active { transform: scale(0.97); }
+
+  /* hero image */
+  .hero-media { position: relative; z-index: 2; display: flex; justify-content: center; }
+  .hero-img-wrap {
+    width: 340px; height: 440px;
+    position: relative;
+  }
+  .hero-img-frame {
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, #1a0f2e 0%, #2d1852 60%, #0d0a1a 100%);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-img-frame::after {
+    content: 'PHOTO\A ayang_cantik_banget_busetdeh.jpg';
+    white-space: pre;
+    color: var(--purple-light);
+    font-family: monospace; font-size: 11px;
+    text-align: center; letter-spacing: 1px;
+    opacity: 0.6;
+  }
+  .hero-img-frame::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(76,35,114,0.3) 0%, transparent 60%);
+  }
+  .hero-img-accent {
+    position: absolute;
+    bottom: -12px; right: -12px;
+    width: 100%; height: 100%;
+    border: 1px solid var(--purple);
+    z-index: -1;
+  }
+
+  /* floating particles (static representation) */
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: var(--purple-light); pointer-events: none;
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50% { transform: translateY(-8px); opacity: 1; }
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: start;
+    border-top: 1px solid var(--border);
+  }
+  .section-header .pretitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--purple-light); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 36px;
+    text-transform: uppercase; letter-spacing: -1px;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .section-header h2 em {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-weight: 400; text-transform: none;
+    color: var(--purple-light); letter-spacing: 0;
+  }
+  .about-body p {
+    font-size: 13px; color: var(--muted);
+    line-height: 1.9; margin-bottom: 16px;
+  }
+  .about-body p strong { color: var(--text); font-weight: 500; }
+
+  /* ── SKILLS PILLS ── */
+  .skills-section {
+    padding: 64px 48px;
+    border-top: 1px solid var(--border);
+  }
+  .skills-section h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 2px; color: var(--muted);
+    margin-bottom: 20px;
+  }
+  .pills {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-bottom: 32px;
+  }
+  .pill {
+    background: rgba(76,35,114,0.15);
+    border: 1px solid var(--border);
+    color: var(--purple-light);
+    font-size: 12px; letter-spacing: 0.5px;
+    padding: 6px 16px; border-radius: 100px;
+    transition: background 200ms ease-out, border-color 200ms ease-out, transform 160ms ease-out;
+    cursor: default;
+  }
+  .pill:hover {
+    background: rgba(76,35,114,0.35);
+    border-color: var(--purple-light);
+    transform: translateY(-2px);
+  }
+  .pill-soft {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.1);
+    color: var(--muted);
+  }
+  .pill-soft:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+    color: var(--text);
+  }
+
+  /* ── RESUME TIMELINE ── */
+  .resume {
+    padding: 64px 48px 100px;
+    border-top: 1px solid var(--border);
+  }
+  .resume-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px; margin-top: 48px;
+  }
+  .timeline-col h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 3px; color: var(--purple-light);
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .timeline-col h3::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+  .timeline-item {
+    padding-left: 20px;
+    border-left: 2px solid var(--border);
+    margin-bottom: 32px;
+    position: relative;
+    transition: border-color 200ms ease-out;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute; left: -5px; top: 6px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--purple);
+    transition: background 200ms ease-out;
+  }
+  .timeline-item:hover { border-color: var(--purple-light); }
+  .timeline-item:hover::before { background: var(--purple); }
+  .timeline-item .org {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700; color: var(--text);
+    margin-bottom: 2px;
+  }
+  .timeline-item .role {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic; font-size: 12px;
+    color: var(--purple-light); margin-bottom: 4px;
+  }
+  .timeline-item .period {
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--muted); text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .timeline-item p {
+    font-size: 11.5px; color: var(--muted); line-height: 1.7;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(76,35,114,0.2);
+    border: 1px solid var(--border);
+    color: var(--purple-light);
+    font-size: 9px; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 2px 8px;
+    border-radius: 4px; margin-bottom: 6px;
+  }
+
+  /* ── FOOTER PREVIEW ── */
+  .footer-preview {
+    border-top: 1px solid var(--border);
+    padding: 48px;
+    background: var(--bg2);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-preview p { font-size: 12px; color: var(--muted); }
+  .footer-preview .contact-link {
+    color: var(--purple-light); text-decoration: none;
+    font-size: 13px; font-family: 'Inter', sans-serif;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 2px;
+    transition: border-color 200ms ease-out;
+  }
+  .footer-preview .contact-link:hover { border-color: var(--purple-light); }
+
+  /* ── ANNOTATION BADGES ── */
+  .annotation {
+    position: absolute;
+    background: rgba(76,35,114,0.9);
+    color: #fff; font-size: 10px;
+    padding: 4px 10px; border-radius: 4px;
+    pointer-events: none; white-space: nowrap;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+  }
+  .annotation::after {
+    content: '';
+    position: absolute; bottom: -6px; left: 10px;
+    border: 3px solid transparent;
+    border-top-color: rgba(76,35,114,0.9);
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">XAS <span>✦</span></div>
+  <ul class="nav-links">
+    <li><a href="#" class="active">About</a></li>
+    <li><a href="#">Resume</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Articles</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow-blob glow-blob-1"></div>
+  <div class="glow-blob glow-blob-2"></div>
+
+  <!-- Floating particles -->
+  <div class="particle" style="width:4px;height:4px;top:20%;left:45%;animation-delay:0s"></div>
+  <div class="particle" style="width:3px;height:3px;top:60%;left:40%;animation-delay:1s;opacity:0.4"></div>
+  <div class="particle" style="width:5px;height:5px;top:35%;left:55%;animation-delay:2s;opacity:0.3"></div>
+  <div class="particle" style="width:2px;height:2px;top:75%;left:48%;animation-delay:0.5s"></div>
+
+  <div class="hero-text">
+    <div class="hero-pretitle">Hello, I'm</div>
+    <h1 class="hero-name">XAVIERA<br/>ANANDA</h1>
+    <span class="hero-name-accent">Sinaiyangsih</span>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      <strong>Communication Science</strong> graduate from Universitas Nasional (GPA 3.96/4.00)
+      with experience in <strong>corporate communication</strong>, news anchoring,
+      content development, and media production.
+    </p>
+    <div class="hero-btns">
+      <button class="btn-primary">View Portfolio</button>
+      <button class="btn-stroke">Download CV</button>
+    </div>
+  </div>
+
+  <div class="hero-media" style="position:relative;">
+    <div class="hero-img-wrap">
+      <div class="hero-img-frame"></div>
+      <div class="hero-img-accent"></div>
+    </div>
+    <!-- Annotations -->
+    <div class="annotation" style="top:10px;left:-130px;">✦ Tilt on mouse hover (spring)</div>
+    <div class="annotation" style="bottom:30px;right:-140px;">✦ Glow border tracks cursor</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="section-header">
+    <div class="pretitle">About</div>
+    <h2>A little <em>about me.</em></h2>
+    <br>
+    <img src="" alt="" style="width:100%;aspect-ratio:4/5;background:linear-gradient(135deg,#1a0f2e,#2d1852);border:1px solid rgba(76,35,114,0.3);display:flex;align-items:center;justify-content:center;object-fit:cover;margin-top:16px;">
+    <p style="font-size:10px;color:#555;font-family:monospace;margin-top:6px;">↑ ayang_moder.jpg</p>
+  </div>
+  <div class="about-body">
+    <p>Hi there! I'm <strong>Xaviera Ananda Sinaiyangsih</strong>, a freshly graduated Communication Science student from Universitas Nasional, Indonesia. I'm passionate about public relations, corporate communication, and the power of storytelling to connect people and spark change.</p>
+    <p>I recently completed an internship at <strong>PT Trakindo Utama</strong>'s Corporate Communication & CSR Department, where I worked on social media content planning, employer branding, internal communications, and end-to-end media production.</p>
+    <p>Beyond academics, I served as <strong>Deputy Studio Head of Unas TV</strong>, News Anchor Coordinator, and moderator for multiple seminars — always finding new ways to communicate with purpose.</p>
+    <div style="display:flex;gap:12px;margin-top:24px;">
+      <button class="btn-stroke" style="font-size:11px;padding:10px 20px;">Download CV</button>
+      <button class="btn-stroke" style="font-size:11px;padding:10px 20px;">Email Me</button>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="skills-section">
+  <div class="section-label">Skills & Abilities</div>
+  <div class="resume-grid" style="margin-top:24px;">
+    <div>
+      <h3>Hard Skills</h3>
+      <div class="pills">
+        <span class="pill">Copywriting & Scriptwriting</span>
+        <span class="pill">Public Speaking</span>
+        <span class="pill">News Anchoring</span>
+        <span class="pill">Social Media Management</span>
+        <span class="pill">Media Production</span>
+        <span class="pill">Event Planning</span>
+        <span class="pill">Canva & CapCut</span>
+        <span class="pill">Prompting Skills</span>
+        <span class="pill">Microsoft Office</span>
+      </div>
+      <p style="font-size:10px;color:#555;font-family:monospace;">↑ Pills animate staggered on scroll (30ms each)</p>
+    </div>
+    <div>
+      <h3>Soft Skills</h3>
+      <div class="pills">
+        <span class="pill pill-soft">Leadership</span>
+        <span class="pill pill-soft">Teamwork</span>
+        <span class="pill pill-soft">Problem Solving</span>
+        <span class="pill pill-soft">Time Management</span>
+        <span class="pill pill-soft">Adaptability</span>
+        <span class="pill pill-soft">Active Listening</span>
+        <span class="pill pill-soft">Mentoring</span>
+        <span class="pill pill-soft">Quality Control</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section class="resume">
+  <div class="section-header">
+    <div class="pretitle">Resume</div>
+    <h2>Education & <em>Experience</em></h2>
+  </div>
+  <div class="resume-grid">
+    <div class="timeline-col">
+      <h3>Education + Work</h3>
+
+      <div class="timeline-item">
+        <div class="badge">Internship · 2025</div>
+        <div class="org">PT Trakindo Utama</div>
+        <div class="role">Corporate Communication & CSR</div>
+        <div class="period">Mar 2025 – Jul 2025 · Jakarta</div>
+        <p>Social media content planning, employer branding, internal articles, event support for Trakindo National Midyear Townhall 2025 & Innovakids 2025.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="badge">Education</div>
+        <div class="org">Universitas Nasional</div>
+        <div class="role">Communication Science — GPA 3.96 / 4.00</div>
+        <div class="period">Sep 2022 – May 2025 · Jakarta</div>
+        <p>Corporate Communication, Public Relations, Media Production. Speaker & Mentor for community service programs.</p>
+      </div>
+    </div>
+
+    <div class="timeline-col">
+      <h3>Organizations</h3>
+
+      <div class="timeline-item">
+        <div class="badge">Leadership</div>
+        <div class="org">Deputy Studio Head — Unas TV</div>
+        <div class="role">Kepengurusan Unas TV 2024–2025</div>
+        <div class="period">Sep 2024 – Sep 2025</div>
+        <p>Led & coordinated all divisions, managed activity timelines, supervised media production quality.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="badge">Coordinator</div>
+        <div class="org">News Anchor Coordinator — Unas TV</div>
+        <div class="role">Kepengurusan Unas TV 2023–2024</div>
+        <div class="period">May 2023 – Sep 2024</div>
+        <p>Managed news anchor division weekly activities, led training & sharing sessions, developed monthly social media content concepts.</p>
+      </div>
+
+      <div class="timeline-item">
+        <div class="badge">Member</div>
+        <div class="org">News Anchor Division — Unas TV</div>
+        <div class="role">Script writer · On-air anchor · Field reporter</div>
+        <div class="period">Nov 2022 – Sep 2025</div>
+        <p>Wrote news scripts, delivered studio news, hosted various content formats, worked as field reporter.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER PREVIEW -->
+<div class="footer-preview">
+  <div>
+    <p style="font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#f0ede8;margin-bottom:4px;">Let's Connect</p>
+    <p>Communication Science grad, open to opportunities.</p>
+  </div>
+  <div style="text-align:right;">
+    <a href="#" class="contact-link">sxavierananda@gmail.com</a><br>
+    <a href="#" class="contact-link" style="margin-top:4px;display:inline-block;">LinkedIn Profile</a>
+  </div>
+</div>
+
+<div style="padding:24px 48px;background:#070611;border-top:1px solid rgba(76,35,114,0.15);">
+  <p style="font-size:10px;color:#333;font-family:monospace;">
+    ✦ DESIGN SPEC PREVIEW — Glow &amp; Depth · Mix 2 Typography · Balanced Interactions · #4c2372<br>
+    Not shown here: Portfolio section (YouTube embeds unchanged), Articles slider (Instagram embeds unchanged), custom cursor, mouse parallax tilt, magnetic buttons
+  </p>
+</div>
+
+</body>
+</html>

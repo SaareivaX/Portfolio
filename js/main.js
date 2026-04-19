@@ -457,6 +457,99 @@
     }; // end ssMoveTo
 
 
+   /* Cursor spotlight
+    * ------------------------------------------------------ */
+    const ssCursorSpotlight = function() {
+        const spotlight = document.createElement('div');
+        spotlight.classList.add('cursor-spotlight');
+        document.body.appendChild(spotlight);
+
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+        let currentX = mouseX;
+        let currentY = mouseY;
+
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animate() {
+            currentX += (mouseX - currentX) * 0.08;
+            currentY += (mouseY - currentY) * 0.08;
+            spotlight.style.transform = `translate(${currentX - 300}px, ${currentY - 300}px)`;
+            requestAnimationFrame(animate);
+        }
+        animate();
+    };
+
+   /* Hero mouse parallax
+    * ------------------------------------------------------ */
+    const ssHeroParallax = function() {
+        const media = document.querySelector('.s-intro__content-media-inner');
+        if (!media) return;
+
+        let targetX = 0, targetY = 0;
+        let currentX = 0, currentY = 0;
+
+        document.addEventListener('mousemove', function(e) {
+            const cx = window.innerWidth / 2;
+            const cy = window.innerHeight / 2;
+            targetX = (e.clientX - cx) / cx * 10;
+            targetY = (e.clientY - cy) / cy * 8;
+        });
+
+        function animate() {
+            currentX += (targetX - currentX) * 0.06;
+            currentY += (targetY - currentY) * 0.06;
+            media.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            requestAnimationFrame(animate);
+        }
+        animate();
+    };
+
+   /* Scroll reveal with IntersectionObserver
+    * ------------------------------------------------------ */
+    const ssScrollReveal = function() {
+        const elements = document.querySelectorAll('[data-reveal]');
+        if (!elements.length) return;
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const delay = parseInt(el.getAttribute('data-reveal-delay') || '0', 10);
+                setTimeout(function() {
+                    el.classList.add('is-revealed');
+                }, delay);
+                observer.unobserve(el);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        elements.forEach(function(el) {
+            observer.observe(el);
+        });
+    };
+
+   /* Card 3D tilt on hover
+    * ------------------------------------------------------ */
+    const ssCardTilt = function() {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+        const cards = document.querySelectorAll('.blog-card');
+        cards.forEach(function(card) {
+            card.addEventListener('mousemove', function(e) {
+                const rect = card.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                card.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${y * -6}deg) translateY(-4px)`;
+            });
+            card.addEventListener('mouseleave', function() {
+                card.style.transform = '';
+            });
+        });
+    };
+
    /* Initialize
     * ------------------------------------------------------ */
     (function ssInit() {
@@ -467,8 +560,10 @@
         ssAlertBoxes();
         ssMoveTo();
         ssHeaderFixed();
-        // sweetalert();
-        
+        ssCursorSpotlight();
+        ssHeroParallax();
+        ssScrollReveal();
+        ssCardTilt();
 
     })();
 

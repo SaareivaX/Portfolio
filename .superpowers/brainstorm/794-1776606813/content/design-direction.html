@@ -1,0 +1,114 @@
+<h2>Choose Your Design Direction</h2>
+<p class="subtitle">All options use dark backgrounds with <strong>#4c2372</strong> as the primary accent. Pick the vibe that feels most like you.</p>
+
+<div class="cards" style="grid-template-columns: repeat(3, 1fr); gap: 20px;">
+
+  <!-- Option A: Editorial Minimal -->
+  <div class="card" data-choice="editorial" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0d0d0d; padding: 0; height: 320px; position: relative; overflow: hidden; border-bottom: 1px solid #222;">
+      <!-- Nav bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 18px; border-bottom: 1px solid #1a1a1a;">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 3px; color: #4c2372; font-family: monospace;">XAS</div>
+        <div style="display:flex; gap:16px;">
+          <div style="width:28px; height:1px; background:#333;"></div>
+          <div style="width:28px; height:1px; background:#333;"></div>
+          <div style="width:28px; height:1px; background:#4c2372;"></div>
+        </div>
+      </div>
+      <!-- Hero content -->
+      <div style="padding: 24px 18px;">
+        <div style="font-size:9px; letter-spacing:4px; color:#4c2372; margin-bottom:10px; font-family: monospace; text-transform:uppercase;">Hello, I'm Xaviera</div>
+        <div style="font-size:22px; line-height:1.2; color:#f0ede8; font-family: Georgia, serif; margin-bottom:14px;">Communicator.<br/>Storyteller.<br/>Creator.</div>
+        <div style="width:30px; height:2px; background:#4c2372; margin-bottom:12px;"></div>
+        <div style="font-size:9px; color:#666; line-height:1.6; max-width:200px;">Communication Science graduate. Corporate comms, news anchor, content creator.</div>
+      </div>
+      <!-- Photo placeholder -->
+      <div style="position:absolute; right:0; top:30px; bottom:0; width:120px; background:linear-gradient(135deg, #1a0f2e 0%, #2d1852 100%); display:flex; align-items:center; justify-content:center;">
+        <div style="font-size:9px; color:#4c2372; text-align:center; letter-spacing:1px;">PHOTO</div>
+      </div>
+      <!-- Accent line -->
+      <div style="position:absolute; left:0; top:0; bottom:0; width:3px; background:#4c2372;"></div>
+    </div>
+    <div class="card-body">
+      <h3>A — Editorial Minimal</h3>
+      <p>Clean serif headlines, thin purple lines, lots of whitespace. Like a luxury magazine — sophisticated and restrained.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Bold Broadcast -->
+  <div class="card" data-choice="broadcast" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0a0a12; padding: 0; height: 320px; position: relative; overflow: hidden; border-bottom: 1px solid #222;">
+      <!-- Nav bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 18px; background:#4c2372;">
+        <div style="font-size: 12px; font-weight: 900; letter-spacing: 1px; color: #fff; font-family: sans-serif;">XAVIERA</div>
+        <div style="display:flex; gap:12px;">
+          <div style="font-size:8px; color:rgba(255,255,255,0.7); letter-spacing:1px;">ABOUT</div>
+          <div style="font-size:8px; color:rgba(255,255,255,0.7); letter-spacing:1px;">WORK</div>
+          <div style="font-size:8px; color:#fff; letter-spacing:1px; border-bottom:1px solid #fff; padding-bottom:1px;">CONTACT</div>
+        </div>
+      </div>
+      <!-- Hero content -->
+      <div style="padding: 20px 18px;">
+        <div style="font-size:8px; background:#4c2372; color:#fff; display:inline-block; padding:3px 8px; letter-spacing:2px; margin-bottom:10px; font-family:sans-serif;">COMMUNICATION SCIENCE</div>
+        <div style="font-size:28px; line-height:1.0; color:#ffffff; font-family: Impact, sans-serif; text-transform:uppercase; margin-bottom:12px; letter-spacing:-1px;">SHAPING<br/>STORIES</div>
+        <div style="font-size:9px; color:#9d6fc9; line-height:1.6; max-width:180px; font-family:sans-serif;">GPA 3.96/4.00 · Corporate Comm · News Anchor · Content Creator</div>
+        <div style="margin-top:14px; display:flex; gap:8px;">
+          <div style="background:#4c2372; color:#fff; font-size:8px; padding:5px 10px; font-family:sans-serif; letter-spacing:1px;">VIEW WORK</div>
+          <div style="border:1px solid #4c2372; color:#9d6fc9; font-size:8px; padding:5px 10px; font-family:sans-serif; letter-spacing:1px;">DOWNLOAD CV</div>
+        </div>
+      </div>
+      <!-- Decorative -->
+      <div style="position:absolute; right:16px; bottom:16px; width:80px; height:80px; border:2px solid #4c2372; border-radius:50%; opacity:0.3;"></div>
+      <div style="position:absolute; right:26px; bottom:26px; width:60px; height:60px; border:1px solid #9d6fc9; border-radius:50%; opacity:0.2;"></div>
+    </div>
+    <div class="card-body">
+      <h3>B — Bold Broadcast</h3>
+      <p>Strong purple fills, impact typography, high contrast. Like a media personality's personal brand — confident and vibrant.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Glow & Depth -->
+  <div class="card" data-choice="glow" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #070611; padding: 0; height: 320px; position: relative; overflow: hidden; border-bottom: 1px solid #222;">
+      <!-- Glow effect -->
+      <div style="position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle, rgba(76,35,114,0.4) 0%, transparent 70%); pointer-events:none;"></div>
+      <div style="position:absolute; bottom:-60px; left:-40px; width:180px; height:180px; background:radial-gradient(circle, rgba(76,35,114,0.2) 0%, transparent 70%); pointer-events:none;"></div>
+      <!-- Nav bar -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 18px; backdrop-filter: blur(10px); background: rgba(76,35,114,0.1); border-bottom: 1px solid rgba(76,35,114,0.3);">
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #c084fc; font-family: sans-serif;">XAS ✦</div>
+        <div style="display:flex; gap:12px;">
+          <div style="font-size:8px; color:#888; letter-spacing:1px;">About</div>
+          <div style="font-size:8px; color:#888; letter-spacing:1px;">Work</div>
+          <div style="font-size:8px; color:#c084fc; letter-spacing:1px;">Contact</div>
+        </div>
+      </div>
+      <!-- Hero content -->
+      <div style="padding: 22px 18px; position:relative; z-index:2;">
+        <div style="font-size:9px; letter-spacing:3px; color:#9d6fc9; margin-bottom:8px; font-family: monospace;">✦ Hello, I'm</div>
+        <div style="font-size:26px; line-height:1.15; margin-bottom:4px; font-family: sans-serif; font-weight: 800;">
+          <span style="color:#ffffff;">Xaviera</span>
+        </div>
+        <div style="font-size:12px; line-height:1.3; color:#9d6fc9; font-family: sans-serif; margin-bottom:12px; font-weight:300; letter-spacing:1px;">Communicator · Storyteller · Creator</div>
+        <div style="font-size:8.5px; color:#555; line-height:1.8; max-width:210px;">Commsci grad with a passion for corporate communication, media production & public relations.</div>
+        <div style="margin-top:14px; display:inline-flex; align-items:center; gap:6px; background: rgba(76,35,114,0.25); border: 1px solid rgba(76,35,114,0.5); color:#c084fc; font-size:8px; padding:5px 12px; border-radius:20px; font-family:sans-serif; letter-spacing:1px;">
+          ↓ Explore my work
+        </div>
+      </div>
+      <!-- Floating dots -->
+      <div style="position:absolute; right:20px; top:70px; width:4px; height:4px; border-radius:50%; background:#4c2372;"></div>
+      <div style="position:absolute; right:40px; top:100px; width:3px; height:3px; border-radius:50%; background:#9d6fc9; opacity:0.6;"></div>
+      <div style="position:absolute; right:15px; top:130px; width:5px; height:5px; border-radius:50%; background:#4c2372; opacity:0.4;"></div>
+      <div style="position:absolute; right:60px; top:85px; width:2px; height:2px; border-radius:50%; background:#c084fc; opacity:0.8;"></div>
+    </div>
+    <div class="card-body">
+      <h3>C — Glow & Depth</h3>
+      <p>Purple glow gradients, glassmorphism touches, floating particles. Dark and atmospheric but playful — like a creative night sky.</p>
+    </div>
+  </div>
+
+</div>
+
+<div class="section" style="margin-top:20px; padding: 16px; background: rgba(76,35,114,0.08); border: 1px solid rgba(76,35,114,0.2); border-radius: 8px;">
+  <p class="label">All options include</p>
+  <p style="font-size:13px; color: #888; margin:0;">Mouse-tracking parallax · Smooth scroll animations · Hover glow on cards · Staggered entrance animations · #4c2372 primary color · Interactive cursor effects</p>
+</div>

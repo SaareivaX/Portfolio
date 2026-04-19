@@ -1,0 +1,61 @@
+<h2>Seberapa Interaktif?</h2>
+<p class="subtitle">Pilih intensitas animasi dan efek mouse. Semua tetap pakai Emil Kowalski principles (easing yang benar, timing yang tepat).</p>
+
+<div class="options" style="flex-direction:column; gap:16px;">
+
+  <div class="option" data-choice="subtle" onclick="toggleSelect(this)" style="align-items:flex-start;">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Subtle & Smooth — "Emil-style"</h3>
+      <p>Animasi yang terasa <em>benar</em> tapi tidak mencolok. Setiap elemen punya purpose.</p>
+      <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Stagger entrance saat scroll</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Hover glow pada card</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Button scale on press</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Smooth page transitions</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Preloader animasi</span>
+        <span style="background:rgba(50,50,50,0.4); border:1px solid #333; color:#555; font-size:11px; padding:3px 10px; border-radius:12px;">✗ Custom cursor</span>
+        <span style="background:rgba(50,50,50,0.4); border:1px solid #333; color:#555; font-size:11px; padding:3px 10px; border-radius:12px;">✗ Mouse parallax</span>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:#666; font-style:italic;">→ Lebih profesional, load ringan, tidak pernah terasa "ganggu"</div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="balanced" onclick="toggleSelect(this)" style="align-items:flex-start;">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Balanced — Fun + Polish ⭐ Recommended</h3>
+      <p>Semua dari A, plus efek mouse yang terasa hidup dan menyenangkan tapi tidak berlebihan.</p>
+      <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Semua dari A</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Custom cursor glowing</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Hero foto tilt on hover (spring)</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Card hover: lift + glow border</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Magnetic button effect</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Floating particles di hero</span>
+        <span style="background:rgba(50,50,50,0.4); border:1px solid #333; color:#555; font-size:11px; padding:3px 10px; border-radius:12px;">✗ Full parallax layers</span>
+        <span style="background:rgba(50,50,50,0.4); border:1px solid #333; color:#555; font-size:11px; padding:3px 10px; border-radius:12px;">✗ Drag interactions</span>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:#666; font-style:italic;">→ Balance antara fun & professional. Yang paling cocok untuk portfolio commsci</div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="maxfun" onclick="toggleSelect(this)" style="align-items:flex-start;">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Max Fun — Full Interactive Playground</h3>
+      <p>Semua efek diaktifkan. Portfolio terasa seperti experience, bukan sekadar halaman.</p>
+      <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Semua dari B</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Mouse parallax 3D di hero</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Text split char animation</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Glow trail mengikuti kursor</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Skill bars animasi counter</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Marquee teks skill scroll</span>
+        <span style="background:rgba(76,35,114,0.2); border:1px solid rgba(76,35,114,0.4); color:#c084fc; font-size:11px; padding:3px 10px; border-radius:12px;">✓ Cursor berubah per section</span>
+      </div>
+      <div style="margin-top:8px; font-size:11px; color:#666; font-style:italic;">→ Paling wow, paling fun, tapi bisa terasa berat di device lambat</div>
+    </div>
+  </div>
+
+</div>

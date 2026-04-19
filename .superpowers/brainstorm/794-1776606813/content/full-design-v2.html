@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design v2 — Xaviera Portfolio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #4c2372;
+    --purple-mid: #7b3fa8;
+    --purple-light: #c084fc;
+    --purple-glow: rgba(76,35,114,0.4);
+    --bg: #070611;
+    --bg2: #0a0918;
+    --text: #f0ede8;
+    --muted: #777;
+    --border: rgba(76,35,114,0.25);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--purple); border-radius: 2px; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 56px;
+    background: rgba(7,6,17,0.75);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(76,35,114,0.15);
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 16px;
+    color: var(--text); letter-spacing: 2px;
+  }
+  .logo-dot { color: var(--purple-light); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: 'Syne', sans-serif; font-size: 12px;
+    font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 180ms ease-out;
+  }
+  .nav-links a:hover, .nav-links .active a { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    align-items: center;
+    padding: 80px 56px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* seamless bg gradient blobs — spans into next section */
+  .bg-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .bg-glow-1 {
+    width: 600px; height: 600px;
+    top: -80px; right: -120px;
+    background: radial-gradient(circle, rgba(76,35,114,0.38) 0%, transparent 65%);
+  }
+  .bg-glow-2 {
+    width: 400px; height: 400px;
+    bottom: -120px; left: 80px;
+    background: radial-gradient(circle, rgba(76,35,114,0.18) 0%, transparent 65%);
+  }
+  .bg-glow-3 {
+    width: 300px; height: 300px;
+    top: 50%; left: 38%;
+    background: radial-gradient(circle, rgba(76,35,114,0.1) 0%, transparent 65%);
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--purple-light); margin-bottom: 24px;
+  }
+  .hero-tag-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--purple-light);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(52px, 7vw, 96px);
+    line-height: 0.88;
+    letter-spacing: -3px;
+    color: var(--text);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-name .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px rgba(192,132,252,0.6);
+    display: block;
+  }
+
+  .hero-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 500;
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-role::before {
+    content: '';
+    width: 32px; height: 1px;
+    background: linear-gradient(90deg, var(--purple-light), transparent);
+  }
+
+  .hero-desc {
+    font-size: 13.5px; color: var(--muted);
+    line-height: 1.85; max-width: 480px;
+    margin-bottom: 40px;
+  }
+  .hero-desc strong { color: var(--purple-light); font-weight: 500; }
+
+  .hero-btns { display: flex; gap: 14px; }
+  .btn-primary {
+    background: var(--purple);
+    color: #fff;
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    padding: 14px 32px; border: none; cursor: pointer;
+    transition: background 200ms ease-out, transform 150ms ease-out;
+  }
+  .btn-primary:hover { background: var(--purple-mid); }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    padding: 14px 32px;
+    border: 1px solid rgba(255,255,255,0.12);
+    cursor: pointer;
+    transition: border-color 200ms ease-out, color 200ms ease-out, transform 150ms ease-out;
+  }
+  .btn-ghost:hover { border-color: var(--purple-light); color: var(--purple-light); }
+  .btn-ghost:active { transform: scale(0.97); }
+
+  /* hero image */
+  .hero-visual { position: relative; z-index: 2; display: flex; justify-content: flex-end; align-items: center; }
+  .photo-frame {
+    width: 320px; height: 420px;
+    position: relative;
+  }
+  .photo-inner {
+    width: 100%; height: 100%;
+    background: linear-gradient(160deg, #1c1030 0%, #2d1852 50%, #0f0c22 100%);
+    border: 1px solid rgba(76,35,114,0.4);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 6px;
+  }
+  .photo-inner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 60% 25%, rgba(76,35,114,0.3) 0%, transparent 60%);
+  }
+  .photo-label {
+    font-family: 'Syne', sans-serif; font-size: 10px;
+    color: var(--purple-light); letter-spacing: 2px;
+    opacity: 0.7; position: relative; z-index: 1;
+  }
+  .photo-offset {
+    position: absolute;
+    bottom: -10px; right: -10px;
+    width: 100%; height: 100%;
+    border: 1px solid rgba(76,35,114,0.3);
+    z-index: -1;
+  }
+  .photo-offset-2 {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 100%; height: 100%;
+    border: 1px solid rgba(76,35,114,0.1);
+    z-index: -2;
+  }
+
+  /* particles */
+  .particle {
+    position: absolute; border-radius: 50%;
+    background: var(--purple-light);
+    animation: floatP 3s ease-in-out infinite;
+  }
+  @keyframes floatP {
+    0%,100% { transform: translateY(0px) scale(1); opacity: 0.6; }
+    50% { transform: translateY(-10px) scale(1.2); opacity: 1; }
+  }
+
+  /* ── SEAMLESS SECTION TRANSITION ── */
+  /* No borders. Sections flow via background variation + glow blobs */
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 80px 56px 80px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .about-glow {
+    position: absolute;
+    width: 500px; height: 500px;
+    top: -100px; right: -100px;
+    background: radial-gradient(circle, rgba(76,35,114,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .sec-tag {
+    font-family: 'Syne', sans-serif; font-size: 10px;
+    font-weight: 700; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--purple-light); margin-bottom: 12px;
+  }
+  .sec-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800; text-transform: uppercase;
+    letter-spacing: -1.5px; line-height: 0.95;
+    color: var(--text); margin-bottom: 28px;
+  }
+  .sec-title span { color: var(--purple-light); }
+
+  .about-img {
+    width: 100%; aspect-ratio: 4/5;
+    background: linear-gradient(160deg, #1c1030, #2d1852, #0f0c22);
+    border: 1px solid rgba(76,35,114,0.3);
+    display: flex; align-items: center; justify-content: center;
+    margin-top: 16px;
+    font-family: 'Syne', sans-serif; font-size: 10px;
+    color: var(--purple-light); letter-spacing: 2px; opacity: 0.6;
+  }
+  .about-text p {
+    font-size: 13px; color: var(--muted); line-height: 1.95;
+    margin-bottom: 18px;
+  }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-text p em { color: var(--purple-light); font-style: normal; font-weight: 500; }
+
+  /* ── SKILLS ── */
+  .skills {
+    padding: 0 56px 80px;
+    position: relative;
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px; margin-top: 36px;
+  }
+  .skill-group-label {
+    font-family: 'Syne', sans-serif; font-size: 10px;
+    font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 16px;
+  }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill {
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 7px 16px; border-radius: 100px;
+    background: rgba(76,35,114,0.15);
+    border: 1px solid rgba(76,35,114,0.35);
+    color: var(--purple-light);
+    transition: background 180ms ease-out, border-color 180ms ease-out, transform 150ms ease-out;
+    cursor: default;
+  }
+  .pill:hover { background: rgba(76,35,114,0.32); border-color: var(--purple-light); transform: translateY(-2px); }
+  .pill-soft {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.1);
+    color: #666;
+  }
+  .pill-soft:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); color: var(--muted); }
+
+  /* ── PORTFOLIO ── */
+  .portfolio {
+    padding: 80px 56px;
+    position: relative;
+    background: linear-gradient(180deg, transparent 0%, rgba(76,35,114,0.04) 50%, transparent 100%);
+  }
+  .port-glow {
+    position: absolute;
+    width: 600px; height: 400px;
+    left: 50%; top: 50%; transform: translate(-50%,-50%);
+    background: radial-gradient(ellipse, rgba(76,35,114,0.1) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+    position: relative; z-index: 1;
+  }
+  .port-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(76,35,114,0.2);
+    transition: border-color 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .port-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(76,35,114,0.15) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 200ms ease-out;
+  }
+  .port-card:hover { border-color: rgba(76,35,114,0.6); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(76,35,114,0.2); }
+  .port-card:hover::before { opacity: 1; }
+  .port-video {
+    width: 100%; aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #0f0c22, #1c1030);
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .port-play {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(76,35,114,0.6);
+    border: 1px solid rgba(192,132,252,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; color: var(--purple-light);
+  }
+  .port-yt-label {
+    position: absolute; bottom: 8px; right: 8px;
+    background: rgba(7,6,17,0.8);
+    color: #f00; font-size: 9px; font-family: 'Syne', sans-serif;
+    font-weight: 700; letter-spacing: 1px;
+    padding: 2px 6px;
+  }
+  .port-info { padding: 14px 16px; }
+  .port-cat {
+    font-family: 'Syne', sans-serif; font-size: 9px;
+    font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--purple-light); margin-bottom: 6px;
+  }
+  .port-title {
+    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700;
+    color: var(--text); line-height: 1.4; margin-bottom: 8px;
+  }
+  .port-desc {
+    font-size: 11px; color: var(--muted); line-height: 1.6;
+  }
+
+  /* note */
+  .embed-note {
+    margin-top: 24px;
+    padding: 12px 20px;
+    background: rgba(76,35,114,0.08);
+    border: 1px solid rgba(76,35,114,0.2);
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif; font-size: 11px;
+    color: var(--muted);
+    position: relative; z-index: 1;
+  }
+  .embed-note strong { color: var(--purple-light); }
+
+  /* ── RESUME ── */
+  .resume {
+    padding: 80px 56px;
+    position: relative;
+  }
+  .resume-glow {
+    position: absolute;
+    width: 400px; height: 400px;
+    bottom: 0; left: -80px;
+    background: radial-gradient(circle, rgba(76,35,114,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .resume-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px; margin-top: 48px;
+  }
+  .timeline-label {
+    font-family: 'Syne', sans-serif; font-size: 10px;
+    font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--purple-light); margin-bottom: 28px;
+  }
+  .tl-item {
+    padding-left: 22px;
+    border-left: 1px solid rgba(76,35,114,0.3);
+    margin-bottom: 28px; position: relative;
+    transition: border-color 200ms ease-out;
+  }
+  .tl-item:hover { border-color: rgba(192,132,252,0.5); }
+  .tl-dot {
+    position: absolute; left: -4.5px; top: 7px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid rgba(76,35,114,0.6);
+    transition: border-color 200ms ease-out, background 200ms ease-out;
+  }
+  .tl-item:hover .tl-dot { border-color: var(--purple-light); background: rgba(76,35,114,0.3); }
+  .tl-badge {
+    display: inline-block;
+    font-family: 'Syne', sans-serif; font-size: 9px;
+    font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--purple-light);
+    background: rgba(76,35,114,0.15);
+    border: 1px solid rgba(76,35,114,0.3);
+    padding: 2px 8px; border-radius: 3px; margin-bottom: 6px;
+  }
+  .tl-org {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+    color: var(--text); margin-bottom: 2px;
+  }
+  .tl-role {
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 500;
+    color: var(--purple-light); margin-bottom: 4px;
+    letter-spacing: 0.5px;
+  }
+  .tl-period {
+    font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+    color: #444; margin-bottom: 8px;
+  }
+  .tl-desc {
+    font-size: 11.5px; color: var(--muted); line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 72px 56px 48px;
+    position: relative;
+    background: linear-gradient(180deg, transparent 0%, rgba(76,35,114,0.06) 100%);
+  }
+  .footer-glow {
+    position: absolute;
+    width: 500px; height: 300px;
+    top: 0; left: 50%; transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(76,35,114,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+    position: relative; z-index: 1;
+  }
+  .footer-cta {
+    font-family: 'Syne', sans-serif; font-size: clamp(24px,3vw,40px);
+    font-weight: 800; text-transform: uppercase;
+    letter-spacing: -1px; line-height: 1;
+    color: var(--text); margin-bottom: 16px;
+  }
+  .footer-cta span { color: var(--purple-light); }
+  .footer-desc { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .footer-links { display: flex; flex-direction: column; gap: 8px; justify-content: center; }
+  .footer-link {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--text); text-decoration: none;
+    display: flex; align-items: center; gap: 10px;
+    transition: color 180ms ease-out;
+  }
+  .footer-link:hover { color: var(--purple-light); }
+  .footer-link-icon {
+    width: 32px; height: 32px; border-radius: 6px;
+    background: rgba(76,35,114,0.2); border: 1px solid rgba(76,35,114,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+  }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; border-top: 1px solid rgba(76,35,114,0.15);
+    position: relative; z-index: 1;
+  }
+  .footer-bottom p { font-family: 'Syne', sans-serif; font-size: 11px; color: #333; letter-spacing: 1px; }
+  .footer-bottom .logo { font-size: 13px; color: var(--muted); }
+
+  /* annotation */
+  .ann {
+    display: inline-block;
+    background: rgba(76,35,114,0.85);
+    color: #fff; font-size: 9.5px;
+    padding: 3px 10px; border-radius: 3px;
+    font-family: 'Syne', sans-serif; letter-spacing: 0.5px; font-weight: 600;
+    margin-top: 6px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">XAS<span class="logo-dot"> ✦</span></div>
+  <ul class="nav-links">
+    <li class="active"><a href="#">About</a></li>
+    <li><a href="#">Resume</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Articles</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-3"></div>
+  <div class="particle" style="width:5px;height:5px;top:22%;left:46%;animation-delay:0s;opacity:0.5;position:absolute;z-index:1;"></div>
+  <div class="particle" style="width:3px;height:3px;top:58%;left:42%;animation-delay:1.2s;opacity:0.3;position:absolute;z-index:1;"></div>
+  <div class="particle" style="width:4px;height:4px;top:38%;left:52%;animation-delay:0.6s;opacity:0.4;position:absolute;z-index:1;"></div>
+  <div class="particle" style="width:2px;height:2px;top:70%;left:50%;animation-delay:1.8s;position:absolute;z-index:1;"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">
+      <div class="hero-tag-dot"></div>
+      Hello, I'm
+    </div>
+    <h1 class="hero-name">
+      XAVIERA<br>
+      <span class="line2">ANANDA</span>
+    </h1>
+    <div class="hero-role">Communication Science Graduate</div>
+    <p class="hero-desc">
+      <strong>Corporate communication</strong>, news anchoring, content development & media production.
+      GPA <strong>3.96 / 4.00</strong> · Universitas Nasional Jakarta.
+    </p>
+    <div class="hero-btns">
+      <button class="btn-primary">View Portfolio</button>
+      <button class="btn-ghost">Download CV</button>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="photo-frame">
+      <div class="photo-inner">
+        <div class="photo-label">PHOTO</div>
+        <div class="photo-label" style="font-size:9px;opacity:0.4;">ayang_cantik_banget_busetdeh.jpg</div>
+      </div>
+      <div class="photo-offset"></div>
+      <div class="photo-offset-2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT — no border, flows directly -->
+<section class="about">
+  <div class="about-glow"></div>
+  <div>
+    <div class="sec-tag">About</div>
+    <h2 class="sec-title">A LITTLE<br><span>ABOUT ME</span></h2>
+    <div class="about-img">ayang_moder.jpg</div>
+  </div>
+  <div class="about-text" style="position:relative;z-index:1;padding-top:60px;">
+    <p>Hi! I'm <strong>Xaviera Ananda Sinaiyangsih</strong>, a freshly graduated Communication Science student from Universitas Nasional. I'm passionate about <em>public relations</em>, corporate communication, and the art of storytelling.</p>
+    <p>I recently completed an internship at <strong>PT Trakindo Utama's Corporate Communication & CSR Department</strong>, where I led social media content planning, employer branding, internal communications, and end-to-end media production for major corporate events.</p>
+    <p>Beyond academics, I served as <strong>Deputy Studio Head of Unas TV</strong>, News Anchor Coordinator, moderator, and public speaker — always finding new ways to communicate with purpose and impact.</p>
+    <div style="display:flex;gap:12px;margin-top:28px;">
+      <button class="btn-primary" style="font-size:11px;padding:11px 24px;">Download CV</button>
+      <button class="btn-ghost" style="font-size:11px;padding:11px 24px;">Email Me</button>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS — no border, seamless -->
+<section class="skills">
+  <div class="sec-tag">Skills & Abilities</div>
+  <div class="skills-grid">
+    <div>
+      <div class="skill-group-label">Hard Skills</div>
+      <div class="pills">
+        <span class="pill">Copywriting</span>
+        <span class="pill">Scriptwriting</span>
+        <span class="pill">Public Speaking</span>
+        <span class="pill">News Anchoring</span>
+        <span class="pill">Social Media Management</span>
+        <span class="pill">Media Production</span>
+        <span class="pill">Event Planning</span>
+        <span class="pill">Canva · CapCut</span>
+        <span class="pill">Prompting Skills</span>
+        <span class="pill">Microsoft Office</span>
+      </div>
+    </div>
+    <div>
+      <div class="skill-group-label">Soft Skills</div>
+      <div class="pills">
+        <span class="pill pill-soft">Leadership</span>
+        <span class="pill pill-soft">Teamwork</span>
+        <span class="pill pill-soft">Problem Solving</span>
+        <span class="pill pill-soft">Time Management</span>
+        <span class="pill pill-soft">Adaptability</span>
+        <span class="pill pill-soft">Active Listening</span>
+        <span class="pill pill-soft">Mentoring</span>
+        <span class="pill pill-soft">Quality Control</span>
+      </div>
+    </div>
+  </div>
+  <div class="ann">↑ pills animate stagger in 30ms on scroll (IntersectionObserver)</div>
+</section>
+
+<!-- RESUME — seamless -->
+<section class="resume">
+  <div class="resume-glow"></div>
+  <div class="sec-tag">Resume</div>
+  <h2 class="sec-title">EDUCATION &<br><span>EXPERIENCE</span></h2>
+  <div class="resume-grid">
+    <div>
+      <div class="timeline-label">Education + Work</div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-badge">Internship · 2025</div>
+        <div class="tl-org">PT Trakindo Utama</div>
+        <div class="tl-role">Corporate Communication & CSR</div>
+        <div class="tl-period">Mar 2025 – Jul 2025 · Jakarta</div>
+        <div class="tl-desc">Social media content planning, employer branding, internal articles, event support for Trakindo National Midyear Townhall 2025 & Innovakids 2025. End-to-end media production.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-badge">Education</div>
+        <div class="tl-org">Universitas Nasional</div>
+        <div class="tl-role">Communication Science · GPA 3.96 / 4.00</div>
+        <div class="tl-period">Sep 2022 – May 2025 · Jakarta</div>
+        <div class="tl-desc">Corporate Communication, Public Relations, Media Production. Speaker & Mentor for university training and community service programs.</div>
+      </div>
+    </div>
+    <div>
+      <div class="timeline-label">Organizations</div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-badge">Leadership</div>
+        <div class="tl-org">Deputy Studio Head — Unas TV</div>
+        <div class="tl-role">Kepengurusan Unas TV 2024–2025</div>
+        <div class="tl-period">Sep 2024 – Sep 2025</div>
+        <div class="tl-desc">Led & coordinated all divisions, managed activity timelines, supervised media production quality.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-badge">Coordinator</div>
+        <div class="tl-org">News Anchor Coordinator — Unas TV</div>
+        <div class="tl-role">Kepengurusan Unas TV 2023–2024</div>
+        <div class="tl-period">May 2023 – Sep 2024</div>
+        <div class="tl-desc">Managed news anchor division, led training sessions, developed monthly social media content concepts.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-badge">Member</div>
+        <div class="tl-org">News Anchor Division — Unas TV</div>
+        <div class="tl-role">Script writer · On-air anchor · Field reporter</div>
+        <div class="tl-period">Nov 2022 – Sep 2025</div>
+        <div class="tl-desc">Wrote news scripts, delivered studio news, hosted content formats, worked as field reporter.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO — seamless, shown in dark card style -->
+<section class="portfolio">
+  <div class="port-glow"></div>
+  <div class="sec-tag">Portfolio</div>
+  <h2 class="sec-title">MY LATEST<br><span>WORK</span></h2>
+
+  <div class="portfolio-grid">
+
+    <div class="port-card">
+      <div class="port-video">
+        <div class="port-play">▶</div>
+        <div class="port-yt-label">YouTube</div>
+      </div>
+      <div class="port-info">
+        <div class="port-cat">News Anchor</div>
+        <div class="port-title">Unas Update: Selasa 17 Januari 2023</div>
+        <div class="port-desc">First debut as news anchor on UNAS TV — delivering news, interviewing guests.</div>
+      </div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-video">
+        <div class="port-play">▶</div>
+        <div class="port-yt-label">YouTube</div>
+      </div>
+      <div class="port-info">
+        <div class="port-cat">Non-News Host</div>
+        <div class="port-title">POTRET PASAK NEGERI Eps. 5 | Sepercik Kehidupan Ibukota</div>
+        <div class="port-desc">Documentary series host on UNAS TV, capturing Indonesia's diverse culture.</div>
+      </div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-video">
+        <div class="port-play">▶</div>
+        <div class="port-yt-label">YouTube</div>
+      </div>
+      <div class="port-info">
+        <div class="port-cat">Seminar Moderator</div>
+        <div class="port-title">SEMINAR KOMUNIKASI "Meningkatkan Kreativitas dan Rasa Percaya Diri"</div>
+        <div class="port-desc">Moderated a communication seminar, facilitated discussion and Q&A.</div>
+      </div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-video">
+        <div class="port-play">▶</div>
+        <div class="port-yt-label">YouTube</div>
+      </div>
+      <div class="port-info">
+        <div class="port-cat">Voice Over · Script Writer</div>
+        <div class="port-title">UNAS UPDATE | Perjanjian Kerjasama UNAS dan Baznas</div>
+        <div class="port-desc">Wrote script and recorded voice over for UNAS TV news program.</div>
+      </div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-video">
+        <div class="port-play">▶</div>
+        <div class="port-yt-label">YouTube</div>
+      </div>
+      <div class="port-info">
+        <div class="port-cat">Non-News Host</div>
+        <div class="port-title">NONA RASA EPS.13 | Sensasi Baru Minum Jamu di Cafe Cozy</div>
+        <div class="port-desc">Hosted food & lifestyle segment exploring a traditional herbal drinks cafe.</div>
+      </div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-video">
+        <div class="port-play">▶</div>
+        <div class="port-yt-label">YouTube</div>
+      </div>
+      <div class="port-info">
+        <div class="port-cat">Reporter</div>
+        <div class="port-title">UNAS UPDATE | Festival Bulan Bahasa 2023</div>
+        <div class="port-desc">Field reporter covering the Language & Literature Festival at UNAS.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="embed-note">
+    ✦ In the actual site, each card contains the <strong>real embedded YouTube player</strong> (unchanged from current). Card titles & descriptions are exactly as they are now.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-glow"></div>
+  <div class="footer-inner">
+    <div>
+      <h2 class="footer-cta">LET'S<br><span>CONNECT</span></h2>
+      <p class="footer-desc">Communication Science graduate, open to corporate communication, PR, and content roles. Let's collaborate!</p>
+    </div>
+    <div class="footer-links">
+      <a href="#" class="footer-link">
+        <div class="footer-link-icon">✉</div>
+        sxavierananda@gmail.com
+      </a>
+      <a href="#" class="footer-link">
+        <div class="footer-link-icon">in</div>
+        LinkedIn Profile
+      </a>
+      <a href="#" class="footer-link">
+        <div class="footer-link-icon">📄</div>
+        Download CV
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Xaviera Ananda Sinaiyangsih</p>
+    <div class="logo">XAS ✦</div>
+  </div>
+</footer>
+
+</body>
+</html>
