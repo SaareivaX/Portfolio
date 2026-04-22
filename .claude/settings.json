@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python \".claude/skills/ui-ux-pro-max/scripts/search.py\" \"portfolio personal communications creator light purple yellow white elegant professional\" --design-system -p \"Xaviera Portfolio\")",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"portfolio light theme pastel purple yellow white elegant creative\" --design-system -p \"Xaviera Portfolio Light\")",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"pastel purple yellow cream soft\" --domain color -n 8)"
+    ]
+  }
+}
