@@ -385,143 +385,201 @@ h1, h2, h3, h4, h5, h6,
 
 /* ===================================================================
  * # BUTTONS
+ * -------------------------------------------------------------------
+ * Base styles.css forces: fixed height, `white-space: nowrap`, `padding: 0 3.6rem`,
+ * and `.btn--stroke { background/color: !important }`.
+ * We fully reset those so text can wrap, padding is sane, and our color rules
+ * actually win. Mobile-first sizing (mobile is the base; md+ enhances).
  * ------------------------------------------------------------------- */
+
 .btn,
-button,
+button:not(.caption-toggle):not(.s-header__menu-toggle),
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  background: #ffffff;
-  color: var(--color-text-dark);
-  border: 1px solid var(--glass-border);
-  border-radius: 999px;
+  /* reset base quirks */
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  height: auto !important;
+  min-height: 48px;
+  line-height: 1.3 !important;
+  padding: 0.85rem 1.6rem !important;
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  /* typography */
+  font-family: var(--font-1) !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal !important;   /* allow wrap instead of overflowing */
+  word-break: break-word;
+
+  /* default visual: white pill with lavender ring */
+  background: #ffffff !important;
+  color: var(--color-text-dark) !important;
+  border: 1.5px solid var(--glass-border) !important;
+  border-radius: 999px !important;
   box-shadow: var(--shadow-sm);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  transition: transform .25s ease, box-shadow .3s ease, background .3s ease, color .25s ease, border-color .3s ease;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .3s ease,
+              background .3s ease, color .25s ease, border-color .3s ease;
 }
+
 .btn:hover,
-button:hover,
+button:not(.caption-toggle):not(.s-header__menu-toggle):hover,
 input[type="submit"]:hover,
 input[type="reset"]:hover,
 input[type="button"]:hover {
-  background: var(--color-1-lighter);
-  color: var(--color-1-darker);
-  border-color: var(--color-1-light);
+  background: var(--color-1-lighter) !important;
+  color: var(--color-1-darker) !important;
+  border-color: var(--color-1-light) !important;
   box-shadow: var(--shadow-md), var(--glow);
   transform: translateY(-2px);
 }
+
 .btn:active,
-button:active {
-  box-shadow: var(--shadow-inset);
+button:not(.caption-toggle):not(.s-header__menu-toggle):active {
   transform: translateY(0);
+  box-shadow: var(--shadow-inset);
 }
 
-/* Generic .btn--primary: solid purple gradient + white text.
- * High specificity (class + class) to beat .btn--stroke cascade. */
-.btn.btn--primary {
-  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
-  color: #ffffff;
-  border: none;
-  box-shadow: var(--shadow-md), 0 8px 24px rgba(139, 92, 246, 0.35);
-  font-weight: 700;
-  letter-spacing: 0.03em;
+.btn:focus-visible,
+button:not(.caption-toggle):not(.s-header__menu-toggle):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.25), var(--shadow-sm);
 }
-.btn.btn--primary:hover {
-  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
-  color: #ffffff;
-  box-shadow: var(--shadow-lg), var(--glow-strong);
+
+/* --- Primary: solid purple gradient (filled) --- */
+.btn.btn--primary,
+button.btn--primary,
+input[type="submit"].btn--primary,
+input[type="reset"].btn--primary,
+input[type="button"].btn--primary {
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid transparent !important;
+  box-shadow: 0 10px 28px rgba(109, 40, 217, 0.28), var(--shadow-sm);
+}
+
+.btn.btn--primary:hover,
+button.btn--primary:hover {
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 16px 40px rgba(109, 40, 217, 0.42), var(--glow);
   transform: translateY(-2px);
 }
 
-/* Stroke: purple outline on white, fills purple on hover with sliding pseudo */
-.btn.btn--stroke {
-  background: transparent;
-  color: var(--color-1-dark);
-  border: 1.5px solid var(--color-1);
-  position: relative;
-  overflow: hidden;
-  font-weight: 700;
-  letter-spacing: 0.03em;
+/* --- Stroke: purple outline on white --- */
+.btn.btn--stroke,
+button.btn--stroke {
+  background: #ffffff !important;
+  color: var(--color-1-dark) !important;
+  border: 1.5px solid var(--color-1) !important;
 }
-.btn.btn--stroke::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--color-1-dark), var(--color-1));
-  transform: translateY(100%);
-  transition: transform .35s cubic-bezier(.4,0,.2,1);
-  z-index: -1;
-}
-.btn.btn--stroke:hover {
-  color: #ffffff;
-  border-color: var(--color-1-dark);
-  background: transparent;
+
+.btn.btn--stroke:hover,
+button.btn--stroke:hover {
+  background: var(--color-1-dark) !important;
+  color: #ffffff !important;
+  border-color: var(--color-1-dark) !important;
   box-shadow: var(--shadow-md), var(--glow);
   transform: translateY(-2px);
-}
-.btn.btn--stroke:hover::before {
-  transform: translateY(0);
 }
 
 /* -------------------------------------------------------------------
- * CV / Email action pair (About section)
- * - Download CV = PRIMARY  : bold purple gradient + white text
- * - Email Me!   = SECONDARY: purple stroke on white + purple text
- * Use ID + class selector (1,1,0) to win against .btn--stroke class rules.
+ * About-section CTA pair (differentiate the two visually):
+ *   Download CV -> PRIMARY filled purple
+ *   Email Me!   -> STROKE with yellow hover
+ * a#ID.btn selector (1,1,1) beats both .btn and .btn--stroke (0,1,0).
  * ------------------------------------------------------------------- */
 a#CvBtn.btn {
-  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 10px 28px rgba(109, 40, 217, 0.30), 0 4px 10px rgba(109, 40, 217, 0.18);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  position: relative;
-  overflow: hidden;
-}
-a#CvBtn.btn::before {
-  /* kill inherited stroke slide-up pseudo on CV button */
-  display: none;
-}
-a#CvBtn.btn::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #5b21b6 0%, #a78bfa 100%);
-  opacity: 0;
-  transition: opacity .35s ease;
-  z-index: 0;
-  border-radius: inherit;
-}
-a#CvBtn.btn > * { position: relative; z-index: 1; }
-a#CvBtn.btn:hover {
-  color: #ffffff;
-  border: none;
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(109, 40, 217, 0.42), 0 6px 14px rgba(252, 211, 77, 0.25);
-}
-a#CvBtn.btn:hover::after {
-  opacity: 1;
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%) !important;
+  color: #ffffff !important;
+  border: 1.5px solid transparent !important;
+  box-shadow: 0 10px 28px rgba(109, 40, 217, 0.30), var(--shadow-sm);
 }
 
-/* Email Me! — stroke, with subtle yellow hover tint for variety */
-a#EmailBtn.btn {
-  background: #ffffff;
-  color: var(--color-1-dark);
-  border: 1.5px solid var(--color-1);
-  font-weight: 700;
-  letter-spacing: 0.04em;
+a#CvBtn.btn:hover {
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%) !important;
+  color: #ffffff !important;
+  border-color: transparent !important;
+  box-shadow: 0 16px 40px rgba(109, 40, 217, 0.45), 0 6px 14px rgba(252, 211, 77, 0.25);
+  transform: translateY(-2px);
 }
+
+a#EmailBtn.btn {
+  background: #ffffff !important;
+  color: var(--color-1-dark) !important;
+  border: 1.5px solid var(--color-1) !important;
+}
+
 a#EmailBtn.btn:hover {
-  background: linear-gradient(135deg, var(--color-3) 0%, var(--color-3-dark) 100%);
-  color: #1e1246;
-  border-color: var(--color-3-dark);
+  background: linear-gradient(135deg, var(--color-3) 0%, var(--color-3-dark) 100%) !important;
+  color: #1e1246 !important;
+  border-color: var(--color-3-dark) !important;
   box-shadow: var(--shadow-md), var(--glow-yellow);
   transform: translateY(-2px);
 }
-a#EmailBtn.btn:hover::before {
-  display: none;
+
+/* -------------------------------------------------------------------
+ * About-section 2-button row: responsive flex layout
+ * Base grid uses `row` + `.xl-5` which doesn't adapt well on narrow screens.
+ * Force wrap + equal-width + safe mobile stack.
+ * ------------------------------------------------------------------- */
+.s-about__content-btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: var(--vspace-1);
+  width: 100%;
+}
+.s-about__content-btn > [class*="xl-"],
+.s-about__content-btn > .column {
+  flex: 1 1 220px;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0;
+}
+
+/* Mobile tweaks: tighter padding, smaller type, stack full-width */
+@media screen and (max-width: 768px) {
+  .btn,
+  button:not(.caption-toggle):not(.s-header__menu-toggle),
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    font-size: 0.9rem;
+    padding: 0.75rem 1.2rem !important;
+    min-height: 46px;
+    letter-spacing: 0.02em;
+  }
+  .s-about__content-btn {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .s-about__content-btn > [class*="xl-"],
+  .s-about__content-btn > .column {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .btn,
+  button:not(.caption-toggle):not(.s-header__menu-toggle),
+  input[type="submit"],
+  input[type="reset"],
+  input[type="button"] {
+    font-size: 0.85rem;
+    padding: 0.7rem 1rem !important;
+  }
 }
 
 
@@ -769,12 +827,100 @@ a#EmailBtn.btn:hover::before {
   padding: 1.4rem;
   transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease, background .3s ease;
   box-shadow: var(--shadow-sm);
+  height: auto;
 }
 .s-menublock__slide:hover {
   border-color: var(--color-1-light);
   background: #ffffff;
   box-shadow: var(--shadow-md), var(--glow);
   transform: translateY(-3px);
+}
+
+.menublock-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  height: 100%;
+}
+
+.menublock-item__title {
+  font-family: var(--font-2);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  line-height: 1.3;
+  margin: 0.25rem 0 0.3rem;
+  letter-spacing: -0.01em;
+}
+
+/* Instagram embed wrapper — consistent box, no caption by default */
+.instagram-embed-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(124, 58, 237, 0.08);
+  min-height: 480px;
+}
+
+.instagram-embed-wrapper .instagram-media {
+  margin: 0 !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.instagram-embed-wrapper iframe {
+  border-radius: 12px !important;
+  max-width: 100% !important;
+}
+
+/* Caption toggle pill button */
+.caption-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.9rem;
+  margin: 0.1rem auto 0;
+  background: #ffffff;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  color: var(--color-1-dark);
+  font-family: var(--font-1);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background .25s ease, border-color .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease;
+  align-self: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.caption-toggle:hover {
+  background: linear-gradient(135deg, var(--color-1-lighter), var(--color-3-lightest));
+  border-color: var(--color-1-light);
+  color: var(--color-1-darker);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.caption-toggle:focus-visible {
+  outline: none;
+  border-color: var(--color-1);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.25);
+}
+
+.caption-toggle__icon {
+  transition: transform .3s ease;
+  flex-shrink: 0;
+}
+
+.caption-toggle[aria-expanded="true"] .caption-toggle__icon {
+  transform: rotate(180deg);
 }
 
 .menublock-btn-prev,
